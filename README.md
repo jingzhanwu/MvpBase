@@ -5,6 +5,7 @@
 ·支持普通的mvc架构开发，简单封装了BaseActivity，使用时继承即可。
 ·支持基于MVP模式的开发，使用时只需继承BaseMapActivity即可。
 ·简单封装了Fragment，继承BaseFragment即可，默认不开启懒加载，需要时手动开启。
+·对Fragment对MVP的支持，继承BaseMvpFragment即可
 
 
 如何使用：
