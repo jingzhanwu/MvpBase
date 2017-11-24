@@ -37,8 +37,12 @@ public class LazyFragmentActivity extends BaseActivity {
 
         String[] titles = new String[]{"fragmeng1", "fragmeng2", "fragmeng3"};
         List<Fragment> fragments = new ArrayList<>();
+
+
         Fragment1 fragment1 = new Fragment1();
         fragment1.openLazyLoad(true);
+
+
         Fragment2 fragment2 = new Fragment2();
         fragment2.openLazyLoad(true);
         Fragment3 fragment3 = new Fragment3();
