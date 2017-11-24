@@ -1,8 +1,10 @@
 package com.jzw.mvp.base.presenter;
 
 import android.app.Activity;
+import android.app.Fragment;
 
 import java.lang.ref.WeakReference;
+import java.util.MissingFormatArgumentException;
 
 /**
  * MVP 架构中的Presenter的基类，所有的presenter都继承这个类
@@ -33,7 +35,11 @@ public abstract class BasePresenter<V> implements IPresenter<V> {
 
     public Activity getContext() {
         if (mView != null) {
-            return (Activity) mView;
+            if (mView instanceof Activity) {
+                return (Activity) mView;
+            } else if (mView instanceof Fragment) {
+                return ((Fragment) mView).getActivity();
+            }
         }
         return null;
     }

@@ -1,33 +1,33 @@
 package com.jzw.mvp.base;
 
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.jzw.mvp.base.presenter.BasePresenter;
 
+
 /**
  * @anthor created by jzw
- * @date 2017/11/23 0023
+ * @date 2017/11/24 0024
  * @change
- * @describe 实现MVP架构的基类，使用者只需继承即可
+ * @describe describe
  **/
-public abstract class BaseMvpActivity<V, P extends BasePresenter<V>> extends BaseActivity {
+public abstract class BaseMvpFragment<V, P extends BasePresenter<V>> extends BaseFragment {
     public P presenter;
 
+    public abstract P initPresenter();
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         presenter = initPresenter();
         presenter.attachView((V) this);
         super.onCreate(savedInstanceState);
     }
 
-    public abstract P initPresenter();
-
     @Override
-    protected void onDestroy() {
+    public void onDetach() {
         presenter.detachView();
-        presenter=null;
-        super.onDestroy();
+        presenter = null;
+        super.onDetach();
     }
 }
