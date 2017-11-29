@@ -173,7 +173,7 @@ compile 'com.jzw.mvp:mvpbase:1.0'
        去做。
 
 好用的Retrofit配合Rxjava的请求库
-https://github.com/jingzhanwu/RetrofitClient
+https://github.com/jingzhanwu/RetrofitRxjavaClient
 
 Android 开发工具集，包含文件，bitmap，数据库，权限，日期，时间UI等常见操作的工具类，能
 大大提升开发效率
