@@ -24,7 +24,7 @@ public abstract class BaseFragment extends Fragment {
     private boolean isInitView = false;//是否与View建立起映射关系
     private boolean isFirstLoad = true;//是否是第一次加载
 
-    private View rootView;
+    public View rootView;
 
     @SuppressLint("NewApi")
     @Nullable
@@ -34,10 +34,15 @@ public abstract class BaseFragment extends Fragment {
             rootView = inflater.inflate(getLayoutId(), container, false);
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         }
+        return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         initView(rootView);
         isInitView = true;
         lazyLoad();
-        return rootView;
     }
 
     @Override

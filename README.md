@@ -10,7 +10,7 @@
 
 如何使用：
 
-compile 'com.jzw.mvp:mvpbase:1.0'
+compile 'com.jzw.mvp:mvpbase:1.3'
 
 1.普通使用方式 ：继承BaseActivity
 
