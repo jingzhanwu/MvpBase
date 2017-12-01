@@ -15,14 +15,14 @@ import com.jzw.mvp.demo.mvp.view.ILoginView;
  * @change
  * @describe 使用MVP 模式登陆
  **/
-public class LoginActivity extends BaseMvpActivity<ILoginView, LoginPresenter> implements ILoginView {
+public class LoginActivity extends DSMvpActivity<ILoginView, LoginPresenter> implements ILoginView {
     @Override
     public int getLayoutId() {
         return R.layout.act_login;
     }
 
     @Override
-    public void initView(Bundle savedInstanceState) {
+    public void initViews(Bundle savedInstanceState) {
         //初始化views
         findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
             @Override

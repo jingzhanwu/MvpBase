@@ -16,15 +16,43 @@ import android.view.View;
 public abstract class BaseActivity extends AppCompatActivity {
     private boolean isShouldHideInput = true;
 
+    /**
+     *  标记目前界面是否已经调用过setcontentView这个方法，如果子类已经有调用，父类就不调用
+     */
+    private boolean initContentView=false;
+    /**
+     * 作用同 initContentView
+     */
+    private boolean initViews=false;
     public abstract int getLayoutId();
 
-    public abstract void initView(Bundle savedInstanceState);
+    public abstract void initViews(Bundle savedInstanceState);
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutId());
-        initView(savedInstanceState);
+        if(!initContentView){
+            setContentView(getLayoutId());
+            setInitContentView(true);
+        }
+        if(!initViews){
+            initViews(savedInstanceState);
+            setInitViews(true);
+        }
+    }
+
+    public void setInitContentView(boolean init){
+        initContentView=init;
+    }
+    public void setInitViews(boolean init){
+        initViews=init;
+    }
+    public boolean isInitContentView(){
+        return initContentView;
+    }
+    public boolean isInitViews(){
+        return initViews;
     }
 
     @Override

@@ -172,6 +172,41 @@ compile 'com.jzw.mvp:mvpbase:1.0'
        除非手动调用，默认情况下没有开启懒加载模式，所以请求数据等操作就放在initView中
        去做。
 
+额外在BaseActivity中提供了四个方法
+
+    public void setInitContentView(boolean init){
+        initContentView=init;
+    }
+    public void setInitViews(boolean init){
+        initViews=init;
+    }
+    public boolean isInitContentView(){
+        return initContentView;
+    }
+    public boolean isInitViews(){
+        return initViews;
+    }
+    
+    这四个方法分别对应setContentView()和initViews()这两个方法，默认不用关心，如果调用者在
+    使用时有特殊的需求，比如自定义一个BaseActivity继承BaseMvpActivity或者BaseActivity，对
+    setContentView和initViewsiew方法调用中间会有一些逻辑处理就可以使用上面提供的方法
+    在子类中动态调用setContentView和initViews方法而避免子类和父类调用两次这两个方法。如下
+    
+    public abstract class DSMvpActivity<V, P extends BasePresenter<V>> extends BaseMvpActivity<V,P> {
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            setContentView(getLayoutId());
+            //加入butterKnife
+            ButterKnife.bind(this);
+            initView(savedInstanceState);
+            setInitContentView(true);
+            setInitViews(true);
+            super.onCreate(savedInstanceState);
+        }
+    }
+    
+    上面的例子 需要在setContentView后initViews之间初始化butterKnife，就可以这样做。
+    
 好用的Retrofit配合Rxjava的请求库
 https://github.com/jingzhanwu/RetrofitClient
 
