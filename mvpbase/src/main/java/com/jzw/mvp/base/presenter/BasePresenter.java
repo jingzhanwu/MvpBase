@@ -1,10 +1,7 @@
 package com.jzw.mvp.base.presenter;
 
 import android.app.Activity;
-import android.app.Fragment;
-
-import java.lang.ref.WeakReference;
-import java.util.MissingFormatArgumentException;
+import android.support.v4.app.Fragment;
 
 /**
  * MVP 架构中的Presenter的基类，所有的presenter都继承这个类

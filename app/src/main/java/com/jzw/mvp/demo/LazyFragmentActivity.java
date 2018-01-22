@@ -31,7 +31,7 @@ public class LazyFragmentActivity extends BaseActivity {
     }
 
     @Override
-    public void initView(Bundle savedInstanceState) {
+    public void initViews(Bundle savedInstanceState) {
         tabLayout = findViewById(R.id.tb);
         viewPager = findViewById(R.id.vp);
 

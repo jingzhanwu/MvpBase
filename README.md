@@ -9,8 +9,17 @@
 
 
 如何使用：
+    allprojects {
+        repositories {
+            ...
+            maven {
+                url 'https://dl.bintray.com/jingzhanwu/jzw/'
+            }
+        }
+    }
 
-compile 'com.jzw.mvp:mvpbase:1.3'
+  gradle: compile 'com.jzw.mvp:mvpbase:1.4'
+
 
 1.普通使用方式 ：继承BaseActivity
 

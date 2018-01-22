@@ -8,6 +8,18 @@
     android:orientation="vertical"
     tools:context="com.jzw.mvp.demo.MainActivity">
 
+
+    <Button
+        android:id="@+id/btn_test_mvp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试MVP+Retrofit2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <Button
         android:id="@+id/btn_mvp"
         android:layout_width="wrap_content"

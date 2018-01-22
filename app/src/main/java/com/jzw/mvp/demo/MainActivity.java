@@ -3,8 +3,10 @@ package com.jzw.mvp.demo;
 import android.os.Bundle;
 import android.view.View;
 
+import com.jzw.dev.http.HttpConfig;
 import com.jzw.mvp.base.BaseActivity;
 import com.jzw.mvp.demo.mvp.LoginActivity;
+import com.jzw.mvp.demo.test.TestActivity;
 
 public class MainActivity extends BaseActivity {
 
@@ -14,7 +16,18 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void initView(Bundle savedInstanceState) {
+    public void initViews(Bundle savedInstanceState) {
+        HttpConfig.init()
+                .setBaseUrl("http://192.168.0.129:8096")
+                .setTimeOut(10)
+                .create();
+
+        findViewById(R.id.btn_test_mvp).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(TestActivity.class);
+            }
+        });
 
         findViewById(R.id.btn_mvp).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,5 +42,7 @@ public class MainActivity extends BaseActivity {
                 startActivity(LazyFragmentActivity.class);
             }
         });
+
+
     }
 }
