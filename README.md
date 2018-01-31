@@ -18,7 +18,7 @@
         }
     }
 
-  gradle: compile 'com.jzw.mvp:mvpbase:1.5'
+  gradle: compile 'com.jzw.mvp:mvpbase:1.6'
 
 
 1.普通使用方式 ：继承BaseActivity
