@@ -20,14 +20,18 @@ public abstract class BaseMvpFragment<V, P extends BasePresenter<V>> extends Bas
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         presenter = initPresenter();
-        presenter.attachView((V) this);
+        if (presenter != null) {
+            presenter.attachView((V) this);
+        }
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public void onDetach() {
-        presenter.detachView();
-        presenter = null;
+        if (presenter != null) {
+            presenter.detachView();
+            presenter = null;
+        }
         super.onDetach();
     }
 }

@@ -18,7 +18,9 @@ public abstract class BaseMvpActivity<V, P extends BasePresenter<V>> extends Bas
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         presenter = initPresenter();
-        presenter.attachView((V) this);
+        if (presenter != null) {
+            presenter.attachView((V) this);
+        }
         super.onCreate(savedInstanceState);
     }
 
@@ -26,8 +28,10 @@ public abstract class BaseMvpActivity<V, P extends BasePresenter<V>> extends Bas
 
     @Override
     protected void onDestroy() {
-        presenter.detachView();
-        presenter=null;
+        if (presenter != null) {
+            presenter.detachView();
+            presenter = null;
+        }
         super.onDestroy();
     }
 }

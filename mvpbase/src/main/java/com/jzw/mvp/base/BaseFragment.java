@@ -18,12 +18,11 @@ import android.view.WindowManager;
  * @describe fragmeng基类
  **/
 public abstract class BaseFragment extends Fragment {
-
     private boolean isOpenLazyLoad = false;//是否支持懒加载，默认不开启
-    private boolean isVisible = false;//当前Fragment是否可见
     private boolean isInitView = false;//是否与View建立起映射关系
-    private boolean isFirstLoad = true;//是否是第一次加载
-
+    private boolean isVisible = false;
+    private boolean isLoaded = false;//是否已经加载过
+    private boolean noCacheLoad = false; //是否开启 界面一显示就加载的功能，默认不开启
     public View rootView;
 
     @SuppressLint("NewApi")
@@ -34,6 +33,9 @@ public abstract class BaseFragment extends Fragment {
             rootView = inflater.inflate(getLayoutId(), container, false);
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         }
+        noCacheLoad = false;
+        isLoaded = false;
+        isInitView = false;
         return rootView;
     }
 
@@ -42,18 +44,26 @@ public abstract class BaseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initView(rootView);
         isInitView = true;
-        lazyLoad();
+        if (isVisible) {
+            lazyLoad();
+        }
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
-        if (isVisibleToUser) {
-            isVisible = true;
-            lazyLoad();
-        } else {
-            isVisible = false;
-        }
         super.setUserVisibleHint(isVisibleToUser);
+        isVisible = getUserVisibleHint();
+        if (isVisible) {
+            lazyLoad();
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden && isResumed()) {
+            lazyLoad();
+        }
     }
 
     public abstract int getLayoutId();
@@ -71,12 +81,13 @@ public abstract class BaseFragment extends Fragment {
      */
     private void lazyLoad() {
         if (isOpenLazyLoad()) {
-            if (isInitView && isVisible && isFirstLoad) {
+            if (isInitView && (noCacheLoad ? true : !isLoaded)) {
+                isLoaded = true;
                 lazyLoadData();
-                isFirstLoad = false;
             }
         }
     }
+
 
     public boolean isOpenLazyLoad() {
         return isOpenLazyLoad;
@@ -93,6 +104,17 @@ public abstract class BaseFragment extends Fragment {
      */
     public void openLazyLoad(boolean isOpen) {
         isOpenLazyLoad = isOpen;
+    }
+
+    /**
+     * 是否开启 页面不缓存的模式，默认不开启
+     * 开启以后，每次页面切换都会加载数据，
+     * 只有在开启懒加载模式下生效
+     *
+     * @return
+     */
+    public void setCacheLoad(boolean isOpen) {
+        this.noCacheLoad = isOpen;
     }
 
     public void startActivity(Class<?> clazz) {
@@ -124,6 +146,16 @@ public abstract class BaseFragment extends Fragment {
             Intent intent = new Intent(getActivity(), clazz);
             intent.putExtras(bundle);
             startActivityForResult(intent, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void startActivity(Class<?> clazz, Bundle bundle, int requestCode) {
+        try {
+            Intent intent = new Intent(getActivity(), clazz);
+            intent.putExtras(bundle);
+            startActivityForResult(intent, requestCode);
         } catch (Exception e) {
             e.printStackTrace();
         }

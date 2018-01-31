@@ -14,16 +14,19 @@ import android.view.View;
  * @describe describe
  **/
 public abstract class BaseActivity extends AppCompatActivity {
-    private boolean isShouldHideInput = true;
-
     /**
-     *  标记目前界面是否已经调用过setcontentView这个方法，如果子类已经有调用，父类就不调用
+     * 是否可以隐藏软键盘
      */
-    private boolean initContentView=false;
+    private boolean isShouldHideInput = true;
+    /**
+     * 标记目前界面是否已经调用过setcontentView这个方法，如果子类已经有调用，父类就不调用
+     */
+    private boolean initContentView = false;
     /**
      * 作用同 initContentView
      */
-    private boolean initViews=false;
+    private boolean initViews = false;
+
     public abstract int getLayoutId();
 
     public abstract void initViews(Bundle savedInstanceState);
@@ -32,48 +35,53 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(!initContentView){
+        if (!initContentView) {
             setContentView(getLayoutId());
             setInitContentView(true);
         }
-        if(!initViews){
+        if (!initViews) {
             initViews(savedInstanceState);
             setInitViews(true);
         }
     }
 
-    public void setInitContentView(boolean init){
-        initContentView=init;
+    public void setInitContentView(boolean init) {
+        initContentView = init;
     }
-    public void setInitViews(boolean init){
-        initViews=init;
+
+    public void setInitViews(boolean init) {
+        initViews = init;
     }
-    public boolean isInitContentView(){
+
+    public boolean isInitContentView() {
         return initContentView;
     }
-    public boolean isInitViews(){
+
+    public boolean isInitViews() {
         return initViews;
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            // 获得当前得到焦点的View，一般情况下就是EditText（特殊情况就是轨迹求或者实体案件会移动焦点）
-            View v = getCurrentFocus();
-            if (InputUtil.isShouldHideInput(v, ev) && isShouldHideInput()) {
-                InputUtil.hideSoftInput(BaseActivity.this, v.getWindowToken());
+            if (isShouldHideInput) {
+                // 获得当前得到焦点的View，一般情况下就是EditText（特殊情况就是轨迹求或者实体案件会移动焦点）
+                View v = getCurrentFocus();
+                if (InputUtil.isShouldHideInput(v, ev)) {
+                    InputUtil.hideSoftInput(BaseActivity.this, v.getWindowToken());
+                }
             }
         }
         return super.dispatchTouchEvent(ev);
     }
 
     /**
-     * 点击屏幕关闭键盘是否可用
+     * 是否开启 点击输入法之外的地方 自动隐藏软键盘功能，默认是开启的
      *
-     * @return
+     * @param hide
      */
-    protected boolean isShouldHideInput() {
-        return isShouldHideInput;
+    public void setShouldHideInput(boolean hide) {
+        this.isShouldHideInput = hide;
     }
 
     public void startActivity(Class<?> clazz) {
@@ -105,6 +113,16 @@ public abstract class BaseActivity extends AppCompatActivity {
             Intent intent = new Intent(this, clazz);
             intent.putExtras(bundle);
             startActivityForResult(intent, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void startActivity(Class<?> clazz, Bundle bundle, int requestCode) {
+        try {
+            Intent intent = new Intent(this, clazz);
+            intent.putExtras(bundle);
+            startActivityForResult(intent, requestCode);
         } catch (Exception e) {
             e.printStackTrace();
         }

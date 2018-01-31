@@ -3,14 +3,15 @@ package com.jzw.mvp.base.presenter;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 
+import java.lang.ref.WeakReference;
+
 /**
  * MVP 架构中的Presenter的基类，所有的presenter都继承这个类
  * Created by 景占午 on 2017/10/19 0019.
  */
 
 public abstract class BasePresenter<V> implements IPresenter<V> {
-
-    private V mView;
+    private WeakReference<V> mView;
 
     /**
      * 一旦presenter和View绑定后就调用初始化方法
@@ -19,7 +20,7 @@ public abstract class BasePresenter<V> implements IPresenter<V> {
      */
     @Override
     public void attachView(V view) {
-        this.mView = view;
+        this.mView = new WeakReference<>(view);
         checkViewAttach();
         init();
     }
@@ -27,15 +28,19 @@ public abstract class BasePresenter<V> implements IPresenter<V> {
     @Override
     public void detachView() {
         release();
-        mView = null;
+        if (mView != null) {
+            mView.clear();
+            mView = null;
+        }
     }
 
     public Activity getContext() {
         if (mView != null) {
-            if (mView instanceof Activity) {
-                return (Activity) mView;
-            } else if (mView instanceof Fragment) {
-                return ((Fragment) mView).getActivity();
+            V view = mView.get();
+            if (view instanceof Activity) {
+                return (Activity) view;
+            } else if (view instanceof Fragment) {
+                return ((Fragment) view).getActivity();
             }
         }
         return null;
@@ -56,7 +61,7 @@ public abstract class BasePresenter<V> implements IPresenter<V> {
     }
 
     public V getMvpView() {
-        return mView;
+        return mView != null ? mView.get() : null;
     }
 
 
