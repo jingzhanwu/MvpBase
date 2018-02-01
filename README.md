@@ -18,7 +18,7 @@
         }
     }
 
-  gradle: compile 'com.jzw.mvp:mvpbase:1.6'
+  gradle: compile 'com.jzw.mvp:mvpbase:1.7'
 
 
 1.普通使用方式 ：继承BaseActivity
@@ -170,11 +170,6 @@
                Toast.makeText(getActivity(), "Fragment 1", Toast.LENGTH_SHORT).show();
            }
        
-           @Override
-           public void setUserVisibleHint(boolean isVisibleToUser) {
-               Log.d(TAG, "Fragment1>>isVisibleToUser>>   " + isVisibleToUser);
-               super.setUserVisibleHint(isVisibleToUser);
-           }
        }
        
        如果开启了懒加载，则会回掉lazyLoadData()这个方法，在这里请求数据，否则不执行，

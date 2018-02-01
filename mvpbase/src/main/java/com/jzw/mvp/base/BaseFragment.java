@@ -33,14 +33,18 @@ public abstract class BaseFragment extends Fragment {
             rootView = inflater.inflate(getLayoutId(), container, false);
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         }
+        return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         initView(rootView);
         isInitView = true;
         if (isVisible) {
             lazyLoad();
         }
-        return rootView;
     }
-
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
