@@ -28,10 +28,15 @@ public abstract class BaseMvpActivity<V, P extends BasePresenter<V>> extends Bas
 
     @Override
     protected void onDestroy() {
+        super.onDestroy();
         if (presenter != null) {
             presenter.detachView();
             presenter = null;
         }
-        super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

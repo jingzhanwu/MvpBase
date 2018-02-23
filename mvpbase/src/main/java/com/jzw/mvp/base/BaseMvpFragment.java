@@ -27,11 +27,11 @@ public abstract class BaseMvpFragment<V, P extends BasePresenter<V>> extends Bas
     }
 
     @Override
-    public void onDetach() {
+    public void onDestroy() {
+        super.onDestroy();
         if (presenter != null) {
             presenter.detachView();
             presenter = null;
         }
-        super.onDetach();
     }
 }
