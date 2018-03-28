@@ -9,16 +9,8 @@
 
 
 如何使用：
-    allprojects {
-        repositories {
-            ...
-            maven {
-                url 'https://dl.bintray.com/jingzhanwu/jzw/'
-            }
-        }
-    }
 
-  gradle: compile 'com.jzw.mvp:mvpbase:1.8'
+  gradle: compile 'com.jzw.mvp:mvpbase:2.0'
 
 
 1.普通使用方式 ：继承BaseActivity
@@ -214,8 +206,10 @@
 好用的Retrofit配合Rxjava的请求库
 https://github.com/jingzhanwu/RetrofitRxjavaClient
 
-Android 开发工具集，包含文件，bitmap，数据库，权限，日期，时间UI等常见操作的工具类，能
-大大提升开发效率
+Android 开发工具库
 https://github.com/jingzhanwu/DevUtils
+
+一个包含拍照 录制 高度定制的多媒体库
+https://github.com/jingzhanwu/MediaLibrary
 
 欢迎大家提问题和意见。
