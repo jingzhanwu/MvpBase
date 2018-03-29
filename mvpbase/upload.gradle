@@ -4,7 +4,7 @@ apply plugin: 'com.novoda.bintray-release'
 //添加
 publish {
     userOrg = 'jingzhanwu'//  bintray.com用户名
-    groupId = 'com.jzw.mvp'//jcenter上的路径
+    groupId = 'com.jzw'//jcenter上的路径
     artifactId = 'mvpbase'//项目名称
     publishVersion = '2.0'//版本号
     desc = 'Oh hi, this is a nice MVP library for a android.'//描述，不重要
