@@ -10,7 +10,7 @@
 
 如何使用：
 
-  gradle: compile 'com.jzw.mvp:mvpbase:2.0'
+  compile 'com.jzw:mvpbase:2.0'
 
 
 1.普通使用方式 ：继承BaseActivity
