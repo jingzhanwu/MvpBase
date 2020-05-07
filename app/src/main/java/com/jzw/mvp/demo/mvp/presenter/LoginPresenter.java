@@ -1,7 +1,7 @@
 package com.jzw.mvp.demo.mvp.presenter;
 
 import com.jzw.mvp.base.presenter.BasePresenter;
-import com.jzw.mvp.demo.mvp.modle.LoginModle;
+import com.jzw.mvp.demo.mvp.modle.LoginModel;
 import com.jzw.mvp.demo.mvp.view.ILoginView;
 
 /**
@@ -12,11 +12,11 @@ import com.jzw.mvp.demo.mvp.view.ILoginView;
  **/
 public class LoginPresenter extends BasePresenter<ILoginView> {
 
-    private LoginModle modle;
+    private LoginModel modle;
 
     @Override
     public void init() {
-        modle = new LoginModle();
+        modle = new LoginModel();
     }
 
     @Override
@@ -27,11 +27,11 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     }
 
     public void login(String user, String pwd) {
-        getMvpView().showLoadding();
+        getMvpView().showLoading();
 
         modle.loginUser(user, pwd);
         getMvpView().loginSuccess(user);
 
-        getMvpView().hideLoadding();
+        getMvpView().hideLoading();
     }
 }

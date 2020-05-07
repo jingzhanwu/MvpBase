@@ -1,9 +1,7 @@
 package com.jzw.mvp.demo.mvp.modle;
 
-import android.app.Activity;
 
-import com.jzw.mvp.base.modle.BaseModle;
-import com.jzw.mvp.base.presenter.BasePresenter;
+import com.jzw.mvp.base.modle.BaseModel;
 
 /**
  * @company 上海道枢信息科技-->
@@ -12,16 +10,7 @@ import com.jzw.mvp.base.presenter.BasePresenter;
  * @change
  * @describe describe
  **/
-public class LoginModle extends BaseModle {
-    @Override
-    public Activity getView() {
-        return null;
-    }
-
-    @Override
-    public BasePresenter getPresenter() {
-        return null;
-    }
+public class LoginModel extends BaseModel {
 
     public void loginUser(String userId, String pwd) {
         System.out.println("登陆》》");
