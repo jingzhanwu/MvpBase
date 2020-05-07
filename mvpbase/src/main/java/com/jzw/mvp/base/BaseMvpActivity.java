@@ -2,7 +2,7 @@ package com.jzw.mvp.base;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.jzw.mvp.base.presenter.BasePresenter;
 
@@ -28,15 +28,16 @@ public abstract class BaseMvpActivity<V, P extends BasePresenter<V>> extends Bas
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         if (presenter != null) {
             presenter.detachView();
             presenter = null;
         }
+        super.onDestroy();
     }
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         finish();
     }
 }

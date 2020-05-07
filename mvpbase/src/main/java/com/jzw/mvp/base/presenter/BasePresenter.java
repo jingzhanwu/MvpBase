@@ -1,7 +1,7 @@
 package com.jzw.mvp.base.presenter;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import java.lang.ref.WeakReference;
 
@@ -11,7 +11,7 @@ import java.lang.ref.WeakReference;
  */
 
 public abstract class BasePresenter<V> implements IPresenter<V> {
-    private WeakReference<V> mView;
+    private  WeakReference<V> mView;
 
     /**
      * 一旦presenter和View绑定后就调用初始化方法

@@ -10,10 +10,10 @@ public interface BaseView {
     /**
      * 显示加载对话框
      */
-    void showLoadding();
+    void showLoading();
 
     /**
      * 隐藏加载对话框
      */
-    void hideLoadding();
+    void hideLoading();
 }

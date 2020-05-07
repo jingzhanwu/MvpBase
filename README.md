@@ -1,16 +1,21 @@
 # MvpBase
 一个好用的MVP架构，使用者无需关心mvp的具体实现，简单继承几个类即可实现，另外还
-包含一个支持Fragmeng懒加载的BaseFragment。
+包含一个支持Fragment懒加载的BaseFragment。
 
 ·支持普通的mvc架构开发，简单封装了BaseActivity，使用时继承即可。
 ·支持基于MVP模式的开发，使用时只需继承BaseMapActivity即可。
 ·简单封装了Fragment，继承BaseFragment即可，默认不开启懒加载，需要时手动开启。
 ·对Fragment对MVP的支持，继承BaseMvpFragment即可
+·从3.0版本开始支持androidx
+
 
 
 如何使用：
 
   compile 'com.jzw:mvpbase:2.0'
+
+  Androidx支持
+  compile 'com.jzw:mvpbase:3.0'
 
 
 1.普通使用方式 ：继承BaseActivity
@@ -120,16 +125,6 @@
          }
       modle集成BaseModle
           public class LoginModle extends BaseModle {
-              @Override
-              public Activity getView() {
-                  return null;
-              }
-          
-              @Override
-              public BasePresenter getPresenter() {
-                  return null;
-              }
-               
                //真正的登陆逻辑
               public void loginUser(String userId, String pwd) {
                   System.out.println("登陆》》");

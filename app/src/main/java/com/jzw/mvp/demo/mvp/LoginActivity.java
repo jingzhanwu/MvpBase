@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.jzw.mvp.base.BaseMvpActivity;
 import com.jzw.mvp.demo.R;
 import com.jzw.mvp.demo.mvp.presenter.LoginPresenter;
 import com.jzw.mvp.demo.mvp.view.ILoginView;
@@ -34,12 +33,12 @@ public class LoginActivity extends DSMvpActivity<ILoginView, LoginPresenter> imp
     }
 
     @Override
-    public void showLoadding() {
+    public void showLoading() {
         //在这里显示加载对话框
     }
 
     @Override
-    public void hideLoadding() {
+    public void hideLoading() {
         //在这里隐藏对话框
     }
 
